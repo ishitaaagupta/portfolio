@@ -204,7 +204,7 @@ const Footer = () => {
             viewport={{ once: true }}
             className="text-muted-foreground text-center mb-4 md:mb-0"
           >
-            © 2024 Ishita Gupta. All rights reserved.
+            © 2025 Ishita Gupta. All rights reserved.
           </motion.p>
 
           {/* Back to Top */}
