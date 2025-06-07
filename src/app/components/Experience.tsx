@@ -17,7 +17,7 @@ const Experience = () => {
     {
       title: "Software Engineer Intern",
       company: "Trackier",
-      period: "Previous",
+      period: "September 2024- January 2025",
       logo: "https://media.licdn.com/dms/image/v2/D4D0BAQHV9T0kIyoYSQ/company-logo_200_200/B4DZX1ZIN2HIAM-/0/1743578762028/trackier_logo?e=1754524800&v=beta&t=khsQ6QBgJgEH1_gkxXITegGD8-_AVKRgEdDi6QhmZL0",
       description:
         "Gained valuable experience as a Software Engineer Intern at Trackier, working on performance marketing and affiliate tracking solutions. Developed skills in backend development and API integration.",
@@ -55,7 +55,7 @@ const Experience = () => {
               className="bg-card border border-border rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
             >
               <div className="flex items-start space-x-4">
-                <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.6 }} className="flex-shrink-0">
+                <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.3 }} className="flex-shrink-0">
                   <div className="w-16 h-16 bg-background rounded-lg flex items-center justify-center border border-border">
                     <Image
                       src={exp.logo || "/placeholder.svg"}

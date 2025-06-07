@@ -52,16 +52,19 @@ const Projects = () => {
               className="bg-card border border-border rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
             >
               <div className="relative overflow-hidden group">
-                <motion.div whileHover={{ scale: 1.05 }} transition={{ duration: 0.3 }} className="relative h-48">
-                  <Image src={project.image || "/placeholder.svg"} alt={project.title} fill className="object-cover" />
+                <motion.div whileHover={{ scale: 1.05 }} transition={{ duration: 0.3 }} className="relative h-56">
+                  <Image
+                    src={project.image || "/placeholder.svg"}
+                    alt={project.title}
+                    fill
+                    className="object-cover object-top"
+                  />
                 </motion.div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
 
               <div className="p-6">
-                <motion.h3 whileHover={{ scale: 1.05 }} className="text-xl font-semibold text-foreground mb-3">
-                  {project.title}
-                </motion.h3>
+                <h3 className="text-xl font-semibold text-foreground mb-3">{project.title}</h3>
 
                 <p className="text-muted-foreground mb-4 leading-relaxed">{project.description}</p>
 

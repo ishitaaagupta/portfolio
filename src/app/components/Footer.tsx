@@ -2,8 +2,34 @@
 
 import { motion } from "framer-motion"
 import { Github, Linkedin, Mail, Download, ArrowUp } from "lucide-react"
+import { useState, useEffect } from "react"
 
 const Footer = () => {
+  const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0)
+
+  const quotes = [
+    "Code is like humor. When you have to explain it, it's bad.",
+    "First, solve the problem. Then, write the code.",
+    "Experience is the name everyone gives to their mistakes.",
+    "In order to understand recursion, one must first understand recursion.",
+    "The best error message is the one that never shows up.",
+    "Code never lies, comments sometimes do.",
+    "Programming isn't about what you know; it's about what you can figure out.",
+    "The most important property of a program is whether it accomplishes the intention of its user.",
+    "Simplicity is the ultimate sophistication.",
+    "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.",
+    "Talk is cheap. Show me the code.",
+    "Programs must be written for people to read, and only incidentally for machines to execute.",
+    "The function of good software is to make the complex appear to be simple.",
+    "Code is poetry written in logic.",
+    "Debugging is twice as hard as writing the code in the first place.",
+    "Make it work, make it right, make it fast.",
+    "The best way to get a project done faster is to start sooner.",
+    "Programming is the art of telling another human being what one wants the computer to do.",
+    "Clean code always looks like it was written by someone who cares.",
+    "Software is a great combination between artistry and engineering.",
+  ]
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" })
   }
@@ -11,12 +37,24 @@ const Footer = () => {
   const downloadResume = () => {
     // Create a link element and trigger download
     const link = document.createElement("a")
-    link.href = "/resume.pdf" // Make sure to add your resume.pdf to the public folder
+    link.href = "/IshitaGupta-Resume.pdf" // Make sure to add your resume.pdf to the public folder
     link.download = "Ishita_Gupta_Resume.pdf"
     link.click()
   }
 
-  const quote = "Code is like humor. When you have to explain it, it's bad."
+  // Change quote every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentQuoteIndex((prevIndex) => (prevIndex + 1) % quotes.length)
+    }, 5000)
+
+    return () => clearInterval(interval)
+  }, [quotes.length])
+
+  // Random quote on component mount
+  useEffect(() => {
+    setCurrentQuoteIndex(Math.floor(Math.random() * quotes.length))
+  }, [quotes.length])
 
   return (
     <footer className="py-20 px-4 bg-card border-t border-border relative overflow-hidden">
@@ -53,11 +91,12 @@ const Footer = () => {
           className="text-center mb-16"
         >
           <motion.blockquote
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.3 }}
-            viewport={{ once: true }}
-            className="text-2xl md:text-3xl font-light text-foreground italic mb-4"
+            key={currentQuoteIndex}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.8 }}
+            className="text-xl md:text-2xl lg:text-3xl font-light text-foreground italic mb-6 min-h-[80px] flex items-center justify-center"
           >
             <motion.span
               animate={{
@@ -66,9 +105,23 @@ const Footer = () => {
               transition={{ duration: 5, repeat: Number.POSITIVE_INFINITY }}
               className="bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent bg-[length:200%_100%]"
             >
-              "{quote}"
+              "{quotes[currentQuoteIndex]}"
             </motion.span>
           </motion.blockquote>
+
+          {/* Quote indicators */}
+          {/* <div className="flex justify-center space-x-2 mb-4">
+            {quotes.slice(0, 5).map((_, index) => (
+              <motion.div
+                key={index}
+                className={`w-2 h-2 rounded-full transition-colors duration-300 ${
+                  index === currentQuoteIndex % 5 ? "bg-primary" : "bg-muted-foreground/30"
+                }`}
+                whileHover={{ scale: 1.2 }}
+              />
+            ))}
+          </div> */}
+
           <motion.div
             initial={{ width: 0 }}
             whileInView={{ width: "100px" }}
@@ -123,16 +176,13 @@ const Footer = () => {
 
         {/* Bottom Section */}
         <div className="flex flex-col md:flex-row justify-between items-center">
-          {/* Resume Download - Icon Only */}
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="relative group mb-4 md:mb-0">
+          {/* Resume Download - Icon Only with Simple Pop Effect */}
+          <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} className="relative group mb-4 md:mb-0">
             <motion.button
               onClick={downloadResume}
-              whileHover={{ rotateZ: 360 }}
-              transition={{ duration: 0.6 }}
-              className="p-4 bg-primary text-primary-foreground rounded-full hover:bg-primary/90 transition-colors duration-200 relative overflow-hidden"
+              className="p-4 bg-primary text-primary-foreground rounded-full hover:bg-primary/90 transition-colors duration-200"
             >
               <Download className="w-6 h-6" />
-              <motion.div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full" />
             </motion.button>
 
             {/* Tooltip */}
@@ -154,7 +204,7 @@ const Footer = () => {
             viewport={{ once: true }}
             className="text-muted-foreground text-center mb-4 md:mb-0"
           >
-            © 2025 Ishita Gupta. All rights reserved.
+            © 2024 Ishita Gupta. All rights reserved.
           </motion.p>
 
           {/* Back to Top */}
