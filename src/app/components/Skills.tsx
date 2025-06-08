@@ -1,27 +1,73 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { useRef } from "react"
+import Image from "next/image"
+import { useTheme } from "next-themes"
+import { useState, useEffect } from "react"
 
 const Skills = () => {
+  const { resolvedTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   const skills = [
-    "TypeScript",
-    "JavaScript",
-    "Git",
-    "Node.js",
-    "Next.js",
-    "Redux Toolkit",
-    "Tailwind CSS",
-    "Express.js",
-    "Postman",
-    "MongoDB",
-    "React Native",
+    {
+      name: "TypeScript",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+    },
+    {
+      name: "JavaScript",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+    },
+    {
+      name: "React",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+    },
+    {
+      name: "Next.js",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
+      bgClass: mounted && resolvedTheme === "dark" ? "bg-white rounded-full p-1" : "",
+    },
+    {
+      name: "Node.js",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+    },
+    {
+      name: "Express.js",
+      logo: "https://cdn.worldvectorlogo.com/logos/express-109.svg",
+      bgClass: "bg-white rounded-full p-1",
+    },
+    {
+      name: "MongoDB",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
+    },
+    {
+      name: "Git",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
+    },
+    {
+      name: "Tailwind CSS",
+      logo: "https://cdn.worldvectorlogo.com/logos/tailwindcss.svg",
+    },
+    {
+      name: "Redux Toolkit",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg",
+    },
+    {
+      name: "React Native",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+    },
+    {
+      name: "Postman",
+      logo: "https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg",
+    },
   ]
 
-  const marqueeRef = useRef<HTMLDivElement>(null)
-
   return (
-    <section id="skills" className="py-20 px-4 overflow-hidden">
+    <section id="skills" className="py-20 px-4">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -31,34 +77,48 @@ const Skills = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Skills</h2>
-          <div className="w-20 h-1 bg-primary mx-auto"></div>
+          <div className="w-full max-w-fit mx-auto h-1 bg-primary mt-2"></div>
         </motion.div>
 
-        <div className="relative overflow-hidden py-8">
-          <div
-            ref={marqueeRef}
-            className="flex space-x-6 marquee-container"
-            onMouseEnter={() => {
-              if (marqueeRef.current) {
-                marqueeRef.current.style.animationPlayState = "paused"
-              }
-            }}
-            onMouseLeave={() => {
-              if (marqueeRef.current) {
-                marqueeRef.current.style.animationPlayState = "running"
-              }
-            }}
-          >
-            {[...skills, ...skills, ...skills].map((skill, index) => (
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {skills.map((skill, index) => (
+            <motion.div
+              key={skill.name}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              whileHover={{
+                scale: 1.05,
+                y: -5,
+                boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
+              }}
+              className="bg-card border border-border rounded-xl px-4 py-6 shadow-lg hover:shadow-xl transition-all duration-300 text-center group cursor-pointer"
+            >
               <motion.div
-                key={index}
-                whileHover={{ scale: 1.1, y: -5 }}
-                className="flex-shrink-0 bg-card border border-border rounded-xl px-6 py-4 shadow-lg hover:shadow-xl transition-all duration-300 min-w-max"
+                whileHover={{ scale: 1.1, rotate: 5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+                className="flex justify-center mb-3"
               >
-                <span className="text-lg font-medium text-foreground whitespace-nowrap">{skill}</span>
+                <div className={`w-12 h-12 flex items-center justify-center ${skill.bgClass || ""}`}>
+                  <Image
+                    src={skill.logo || "/placeholder.svg"}
+                    alt={`${skill.name} logo`}
+                    width={48}
+                    height={48}
+                    className="object-contain filter group-hover:brightness-110 transition-all duration-300"
+                  />
+                </div>
               </motion.div>
-            ))}
-          </div>
+
+              <motion.span
+                className="text-sm md:text-base font-medium text-foreground group-hover:text-primary transition-colors duration-300 block"
+                whileHover={{ scale: 1.05 }}
+              >
+                {skill.name}
+              </motion.span>
+            </motion.div>
+          ))}
         </div>
 
         <motion.p
@@ -66,9 +126,9 @@ const Skills = () => {
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.5 }}
           viewport={{ once: true }}
-          className="text-center text-muted-foreground mt-8"
+          className="text-center text-muted-foreground mt-12"
         >
-          Hover to pause the animation
+          Technologies I work with
         </motion.p>
       </div>
     </section>

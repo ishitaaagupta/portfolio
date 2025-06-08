@@ -5,10 +5,12 @@ import { motion, AnimatePresence } from "framer-motion"
 import { useTheme } from "next-themes"
 import { Sun, Moon, Menu, X } from "lucide-react"
 import Logo from "./Logo"
+import Loader from "./Loader"
 
 const Navbar = () => {
   const [mounted, setMounted] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const { theme, setTheme, resolvedTheme } = useTheme()
 
   useEffect(() => {
@@ -24,9 +26,14 @@ const Navbar = () => {
   }
 
   const toggleTheme = () => {
+    setIsLoading(true)
     const newTheme = resolvedTheme === "dark" ? "light" : "dark"
     setTheme(newTheme)
-    window.dispatchEvent(new Event("themeChange"))
+
+    // Add a delay to show the loader, then reload
+    setTimeout(() => {
+      window.location.reload()
+    }, 3000) // 3 seconds to show the loader animation
   }
 
   const toggleMobileMenu = () => {
@@ -58,6 +65,9 @@ const Navbar = () => {
 
   return (
     <>
+      {/* Loader */}
+      <AnimatePresence>{isLoading && <Loader />}</AnimatePresence>
+
       {/* Desktop Navbar */}
       <motion.nav
         initial={{ y: -100, opacity: 0 }}
@@ -104,7 +114,8 @@ const Navbar = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={toggleTheme}
-            className="p-2 rounded-full bg-secondary hover:bg-accent transition-colors duration-200"
+            disabled={isLoading}
+            className="p-2 rounded-full bg-secondary hover:bg-accent transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             aria-label="Toggle theme"
           >
             {resolvedTheme === "dark" ? (
@@ -159,26 +170,27 @@ const Navbar = () => {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.2, delay: navItems.length * 0.1 }}
-                  className="pt-4 border-t border-border"
+                  // className="pt-4 border-t border-border"
                 >
-                  <motion.button
+                  {/* <motion.button
                     whileHover={{ scale: 1.02, x: 10 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={toggleTheme}
-                    className="flex items-center space-x-3 py-3 px-4 text-foreground hover:text-primary hover:bg-secondary/50 rounded-lg transition-all duration-200 text-lg font-medium w-full"
-                  >
-                    {resolvedTheme === "dark" ? (
-                      <>
-                        <Sun className="w-5 h-5" />
-                        <span>Light Mode</span>
-                      </>
-                    ) : (
-                      <>
-                        <Moon className="w-5 h-5" />
-                        <span>Dark Mode</span>
-                      </>
-                    )}
-                  </motion.button>
+                    disabled={isLoading}
+                    className="flex items-center space-x-3 py-3 px-4 text-foreground hover:text-primary hover:bg-secondary/50 rounded-lg transition-all duration-200 text-lg font-medium w-full disabled:opacity-50 disabled:cursor-not-allowed"
+                  > */}
+                      {/* {resolvedTheme === "dark" ? (
+                        <>
+                          <Sun className="w-5 h-5" />
+                          <span>Light Mode</span>
+                        </>
+                      ) : (
+                        <>
+                          <Moon className="w-5 h-5" />
+                          <span>Dark Mode</span>
+                        </>
+                      )} */}
+                  {/* </motion.button> */}
                 </motion.div>
               </div>
             </motion.div>

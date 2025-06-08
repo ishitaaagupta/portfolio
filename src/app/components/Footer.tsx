@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Github, Linkedin, Mail, Download, ArrowUp } from "lucide-react"
+import { Github, Linkedin, Mail, ArrowUp } from "lucide-react"
 import { useState, useEffect } from "react"
 
 const Footer = () => {
@@ -32,14 +32,6 @@ const Footer = () => {
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" })
-  }
-
-  const downloadResume = () => {
-    // Create a link element and trigger download
-    const link = document.createElement("a")
-    link.href = "/Ishita_Gupta_Resume.pdf" // Updated to use the correct file name
-    link.download = "IshitaGupta-Resume.pdf"
-    link.click()
   }
 
   // Change quote every 5 seconds
@@ -110,7 +102,7 @@ const Footer = () => {
           </motion.blockquote>
 
           {/* Quote indicators */}
-          <div className="flex justify-center space-x-2 mb-4">
+          {/* <div className="flex justify-center space-x-2 mb-4">
             {quotes.slice(0, 5).map((_, index) => (
               <motion.div
                 key={index}
@@ -120,15 +112,15 @@ const Footer = () => {
                 whileHover={{ scale: 1.2 }}
               />
             ))}
-          </div>
+          </div> */}
 
-          <motion.div
-            initial={{ width: 0 }}
-            whileInView={{ width: "100px" }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            viewport={{ once: true }}
-            className="h-0.5 bg-primary mx-auto"
-          ></motion.div>
+            {/* <motion.div
+              initial={{ width: 0 }}
+              whileInView={{ width: "200px" }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              viewport={{ once: true }}
+              className="h-0.5 bg-primary mx-auto"
+            ></motion.div> */}
         </motion.div>
 
         {/* Social Links */}
@@ -175,27 +167,7 @@ const Footer = () => {
         </motion.div>
 
         {/* Bottom Section */}
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          {/* Resume Download - Icon Only with Simple Pop Effect */}
-          <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} className="relative group mb-4 md:mb-0">
-            <motion.button
-              onClick={downloadResume}
-              className="p-4 bg-primary text-primary-foreground rounded-full hover:bg-primary/90 transition-colors duration-200"
-            >
-              <Download className="w-6 h-6" />
-            </motion.button>
-
-            {/* Tooltip */}
-            <motion.div
-              initial={{ opacity: 0, y: 10, scale: 0.8 }}
-              whileHover={{ opacity: 1, y: 0, scale: 1 }}
-              className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-foreground text-background px-3 py-1 rounded-lg text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none"
-            >
-              Download Resume
-              <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-foreground"></div>
-            </motion.div>
-          </motion.div>
-
+        <div className="flex justify-center">
           {/* Back to Top */}
           <motion.button
             whileHover={{ scale: 1.05, y: -2 }}
