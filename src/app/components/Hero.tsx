@@ -96,7 +96,7 @@ const Hero = () => {
   }
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center px-4 relative">
+    <section id="home" className="min-h-screen flex items-center justify-center px-4 relative py-8 md:py-0">
       {/* Mobile Blur Backdrop */}
       <div className="absolute inset-0 md:hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 backdrop-blur-[1px]"></div>

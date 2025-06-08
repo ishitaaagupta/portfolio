@@ -35,24 +35,6 @@ const About = () => {
               With a foundation in JavaScript and hands-on experience in the MERN stack, I thrive in dynamic
               environments where I can continuously learn and contribute to impactful projects.
             </p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              viewport={{ once: true }}
-              className="flex flex-wrap gap-4 pt-4"
-            >
-              {["Problem Solving", "Team Collaboration", "Continuous Learning", "Innovation"].map((skill, index) => (
-                <motion.span
-                  key={skill}
-                  whileHover={{ scale: 1.05 }}
-                  className="px-4 py-2 bg-secondary text-secondary-foreground rounded-full text-sm font-medium"
-                >
-                  {skill}
-                </motion.span>
-              ))}
-            </motion.div>
           </motion.div>
 
           <motion.div

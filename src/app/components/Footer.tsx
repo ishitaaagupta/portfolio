@@ -37,8 +37,8 @@ const Footer = () => {
   const downloadResume = () => {
     // Create a link element and trigger download
     const link = document.createElement("a")
-    link.href = "/IshitaGupta-Resume.pdf" // Make sure to add your resume.pdf to the public folder
-    link.download = "Ishita_Gupta_Resume.pdf"
+    link.href = "/Ishita_Gupta_Resume.pdf" // Updated to use the correct file name
+    link.download = "IshitaGupta-Resume.pdf"
     link.click()
   }
 
@@ -110,7 +110,7 @@ const Footer = () => {
           </motion.blockquote>
 
           {/* Quote indicators */}
-          {/* <div className="flex justify-center space-x-2 mb-4">
+          <div className="flex justify-center space-x-2 mb-4">
             {quotes.slice(0, 5).map((_, index) => (
               <motion.div
                 key={index}
@@ -120,7 +120,7 @@ const Footer = () => {
                 whileHover={{ scale: 1.2 }}
               />
             ))}
-          </div> */}
+          </div>
 
           <motion.div
             initial={{ width: 0 }}
@@ -191,21 +191,10 @@ const Footer = () => {
               whileHover={{ opacity: 1, y: 0, scale: 1 }}
               className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-foreground text-background px-3 py-1 rounded-lg text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none"
             >
-              Download my CV
+              Download Resume
               <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-foreground"></div>
             </motion.div>
           </motion.div>
-
-          {/* Copyright */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            viewport={{ once: true }}
-            className="text-muted-foreground text-center mb-4 md:mb-0"
-          >
-            © 2025 Ishita Gupta. All rights reserved.
-          </motion.p>
 
           {/* Back to Top */}
           <motion.button
