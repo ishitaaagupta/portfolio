@@ -128,7 +128,7 @@ const Skills = () => {
           viewport={{ once: true }}
           className="text-center text-muted-foreground mt-12"
         >
-          Technologies I work with
+   
         </motion.p>
       </div>
     </section>
