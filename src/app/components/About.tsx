@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import Image from "next/image"
+import { motion } from "framer-motion";
+import Image from "next/image";
 
 const About = () => {
   return (
@@ -14,7 +14,9 @@ const About = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">About Me</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            About Me
+          </h2>
           {/* <div className="w-20 h-1 bg-primary mx-auto"></div> */}
         </motion.div>
 
@@ -27,13 +29,19 @@ const About = () => {
             className="space-y-6"
           >
             <p className="text-lg text-muted-foreground leading-relaxed">
-              I am a Software Engineer at TechAhead with a strong interest in both frontend and backend development.
-              Passionate about building seamless user experiences and scalable applications, I enjoy working across the
-              full stack—from crafting intuitive UIs to designing robust backend logic.
+              Passionate Full-Stack Developer with hands-on experience in
+              building scalable web applications using React, Redux Toolkit,
+              Node.js, Express.js, MongoDB, and MySQL. Skilled in developing
+              intuitive UI components, optimizing user experiences, and
+              enhancing application performance. Strong problem-solving
+              abilities with expertise in debugging, API development, and
+              improving system efficiency. Dedicated to delivering high-quality,
+              maintainable, and responsive web solutions.
             </p>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              With a foundation in JavaScript and hands-on experience in the MERN stack, I thrive in dynamic
-              environments where I can continuously learn and contribute to impactful projects.
+              With a foundation in JavaScript and hands-on experience in the
+              MERN stack, I thrive in dynamic environments where I can
+              continuously learn and contribute to impactful projects.
             </p>
           </motion.div>
 
@@ -51,7 +59,7 @@ const About = () => {
             >
               <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary rounded-2xl blur-lg opacity-30"></div>
               <Image
-                src="https://media.licdn.com/dms/image/v2/D5603AQHAKK4AYy3wSw/profile-displayphoto-shrink_400_400/B56ZZbxha8GkAo-/0/1745296432048?e=1754524800&v=beta&t=E-CeL-vDp1uYLz8wVNU318aYbkIbOuw-rw5AJ8U98bQ"
+                src="https://media.licdn.com/dms/image/v2/D4E03AQGwBCiUAvzzUg/profile-displayphoto-shrink_400_400/B4EZdaVDv_GcAk-/0/1749567160869?e=1755129600&v=beta&t=sgB0zmcJZXh1hNVeHQZSB2VlZQaftR5QyAz_IpNkpuU"
                 alt="Ishita Gupta"
                 width={400}
                 height={400}
@@ -62,7 +70,7 @@ const About = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default About
+export default About;

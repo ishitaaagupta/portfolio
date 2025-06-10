@@ -17,7 +17,7 @@ const Navbar = () => {
     setMounted(true)
   }, [])
 
-  const navItems = ["Home", "About Me", "Experience", "Skills", "Projects"]
+  const navItems = [ "About Me", "Experience", "Skills", "Projects"]
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId.toLowerCase().replace(" ", "-"))

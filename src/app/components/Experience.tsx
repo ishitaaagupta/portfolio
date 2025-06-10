@@ -11,7 +11,7 @@ const Experience = () => {
       period: "February 2025 - Present",
       logo: "https://cdn-ilajckf.nitrocdn.com/utLabjbGVjpaYDQkazoKnooguTzYeQRR/assets/images/optimized/rev-6d33770/tamediacdn.techaheadcorp.com/wp-content/uploads/2020/10/17061151/logo-black.svg",
       description:
-        "Working as a Junior Associate Software Engineer at TechAhead, a leading mobile app development company. Contributing to full-stack development projects and collaborating with cross-functional teams to deliver high-quality software solutions.",
+        "Techahead's mission is to push the boundaries of digital innovation—crafting AI-driven, cloud-native, and high-performing solutions that redefine user experiences and operational efficiency. From mobile and web applications to enterprise cloud and AI consulting, we build with precision, data-driven insights, and a relentless focus on impact.",
       current: true,
     },
     {
@@ -20,7 +20,7 @@ const Experience = () => {
       period: "September 2024 - January 2025",
       logo: "https://media.licdn.com/dms/image/v2/D4D0BAQHV9T0kIyoYSQ/company-logo_200_200/B4DZX1ZIN2HIAM-/0/1743578762028/trackier_logo?e=1754524800&v=beta&t=khsQ6QBgJgEH1_gkxXITegGD8-_AVKRgEdDi6QhmZL0",
       description:
-        "Gained valuable experience as a Software Engineer Intern at Trackier, working on performance marketing and affiliate tracking solutions. Developed skills in backend development and API integration.",
+"Trackier is a leading SaaS platform that specializes in performance marketing and affiliate marketing solutions. We empower businesses to optimize their marketing strategies through advanced tracking, analytics, and automation tools. Our platform is designed to enhance user engagement, increase ROI, and streamline marketing operations.",
       current: false,
     },
   ]

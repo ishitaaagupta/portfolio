@@ -13,123 +13,208 @@ const Skills = () => {
     setMounted(true)
   }, [])
 
-  const skills = [
+  const skillCategories = [
     {
-      name: "TypeScript",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+      category: "Frontend Development",
+      skills: [
+        {
+          name: "React",
+          logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+        },
+        {
+          name: "Next.js",
+          logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
+        },
+        {
+          name: "TypeScript",
+          logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+        },
+        {
+          name: "JavaScript",
+          logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+        },
+        {
+          name: "Tailwind CSS",
+          logo: "https://cdn.worldvectorlogo.com/logos/tailwindcss.svg",
+        },
+        {
+          name: "Redux Toolkit",
+          logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg",
+        },
+      ],
     },
     {
-      name: "JavaScript",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+      category: "Backend Development",
+      skills: [
+        {
+          name: "Node.js",
+          logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+        },
+        {
+          name: "Express.js",
+          logo: "https://cdn.worldvectorlogo.com/logos/express-109.svg",
+        },
+        {
+          name: "MongoDB",
+          logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
+        },
+      ],
     },
     {
-      name: "React",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+      category: "Tools & APIs",
+      skills: [
+        {
+          name: "Postman",
+          logo: "https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg",
+        },
+        {
+          name: "Swagger",
+          logo: "https://static1.smartbear.co/swagger/media/assets/images/swagger_logo.svg",
+        },
+        {
+          name: "Stripe",
+          logo: "https://cdn.worldvectorlogo.com/logos/stripe-4.svg",
+        },
+      ],
     },
     {
-      name: "Next.js",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
-      bgClass: mounted && resolvedTheme === "dark" ? "bg-white rounded-full p-1" : "",
+      category: "Cloud & Deployment",
+      skills: [
+        {
+          name: "Vercel",
+          logo: "https://assets.vercel.com/image/upload/v1662130559/nextjs/Icon_light_background.png",
+        },
+        {
+          name: "Netlify",
+          logo: "https://cdn.worldvectorlogo.com/logos/netlify.svg",
+        },
+        {
+          name: "Cloudinary",
+          logo: "https://cdn.worldvectorlogo.com/logos/cloudinary-1.svg",
+        },
+      ],
     },
     {
-      name: "Node.js",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
-    },
-    {
-      name: "Express.js",
-      logo: "https://cdn.worldvectorlogo.com/logos/express-109.svg",
-      bgClass: "bg-white rounded-full p-1",
-    },
-    {
-      name: "MongoDB",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
-    },
-    {
-      name: "Git",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
-    },
-    {
-      name: "Tailwind CSS",
-      logo: "https://cdn.worldvectorlogo.com/logos/tailwindcss.svg",
-    },
-    {
-      name: "Redux Toolkit",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg",
-    },
-    {
-      name: "React Native",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-    },
-    {
-      name: "Postman",
-      logo: "https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg",
+      category: "Version Control",
+      skills: [
+        {
+          name: "Git",
+          logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
+        },
+        {
+          name: "GitHub",
+          logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
+        },
+        {
+          name: "GitLab",
+          logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gitlab/gitlab-original.svg",
+        },
+      ],
     },
   ]
 
   return (
-    <section id="skills" className="py-20 px-4">
-      <div className="max-w-6xl mx-auto">
+    <section id="skills" className="py-16 px-4 bg-background">
+      <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Skills</h2>
-          <div className="w-full max-w-fit mx-auto h-1 bg-primary mt-2"></div>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            Professional <span className="text-primary">Skillset</span>
+          </h2>
+          {/* <div className="w-20 h-1 bg-primary mx-auto"></div> */}
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {skills.map((skill, index) => (
+        <div className="space-y-8">
+          {skillCategories.map((categoryData, categoryIndex) => (
             <motion.div
-              key={skill.name}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              key={categoryData.category}
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
               viewport={{ once: true }}
-              whileHover={{
-                scale: 1.05,
-                y: -5,
-                boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
-              }}
-              className="bg-card border border-border rounded-xl px-4 py-6 shadow-lg hover:shadow-xl transition-all duration-300 text-center group cursor-pointer"
+              className="flex flex-col lg:flex-row lg:items-center gap-6"
             >
-              <motion.div
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                transition={{ type: "spring", stiffness: 300 }}
-                className="flex justify-center mb-3"
-              >
-                <div className={`w-12 h-12 flex items-center justify-center ${skill.bgClass || ""}`}>
-                  <Image
-                    src={skill.logo || "/placeholder.svg"}
-                    alt={`${skill.name} logo`}
-                    width={48}
-                    height={48}
-                    className="object-contain filter group-hover:brightness-110 transition-all duration-300"
-                  />
-                </div>
-              </motion.div>
+              {/* Category Label */}
+              <div className="lg:w-64 flex-shrink-0">
+                <h3 className="text-xl md:text-2xl font-semibold text-primary">{categoryData.category}</h3>
+              </div>
 
-              <motion.span
-                className="text-sm md:text-base font-medium text-foreground group-hover:text-primary transition-colors duration-300 block"
-                whileHover={{ scale: 1.05 }}
-              >
-                {skill.name}
-              </motion.span>
+              {/* Skills Grid */}
+              <div className="flex-1">
+                <div className="grid grid-cols-3 gap-4">
+                  {categoryData.skills.map((skill, skillIndex) => (
+                    <motion.div
+                      key={skill.name}
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{
+                        duration: 0.5,
+                        delay: categoryIndex * 0.1 + skillIndex * 0.05,
+                      }}
+                      viewport={{ once: true }}
+                      whileHover={{
+                        scale: 1.05,
+                        y: -5,
+                      }}
+                      className="bg-card border-2 border-border rounded-xl p-4 shadow-lg hover:shadow-xl hover:border-primary/50 transition-all duration-300 text-center group cursor-pointer"
+                    >
+                      <motion.div
+                        whileHover={{ scale: 1.1, rotate: 5 }}
+                        transition={{ type: "spring", stiffness: 300 }}
+                        className="flex justify-center mb-3"
+                      >
+                        <div className="w-12 h-12 flex items-center justify-center">
+                          <Image
+                            src={skill.logo || "/placeholder.svg"}
+                            alt={`${skill.name} logo`}
+                            width={48}
+                            height={48}
+                            className="object-contain filter group-hover:brightness-110 transition-all duration-300"
+                            style={{
+                              filter:
+                                mounted &&
+                                resolvedTheme === "dark" &&
+                                (skill.name === "Next.js" ||
+                                  skill.name === "GitHub" ||
+                                  skill.name === "Express.js" ||
+                                  skill.name === "Swagger")
+                                  ? "invert(1)"
+                                  : "none",
+                            }}
+                          />
+                        </div>
+                      </motion.div>
+
+                      <motion.span
+                        className="text-xs md:text-sm font-medium text-foreground group-hover:text-primary transition-colors duration-300 block leading-tight"
+                        whileHover={{ scale: 1.05 }}
+                      >
+                        {skill.name}
+                      </motion.span>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
             </motion.div>
           ))}
         </div>
 
-        <motion.p
+        <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.5 }}
           viewport={{ once: true }}
-          className="text-center text-muted-foreground mt-12"
+          className="text-center mt-12"
         >
-   
-        </motion.p>
+          {/* <p className="text-muted-foreground">
+            Continuously expanding my toolkit with emerging technologies and industry best practices
+          </p> */}
+        </motion.div>
       </div>
     </section>
   )
