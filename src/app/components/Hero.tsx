@@ -1,5 +1,3 @@
-
-
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
@@ -124,14 +122,10 @@ const Hero = () => {
         </motion.button>
 
         {/* Tooltip */}
-        <motion.div
-          initial={{ opacity: 0, y: 10, scale: 0.8 }}
-          whileHover={{ opacity: 1, y: 0, scale: 1 }}
-          className="absolute bottom-full mb-3 left-1/2 transform -translate-x-1/2 bg-foreground text-background px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none"
-        >
+        <div className="absolute left-full ml-3 top-1/2 transform -translate-y-1/2 bg-foreground text-background px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none shadow-lg">
           Download Resume
-          <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-foreground"></div>
-        </motion.div>
+          <div className="absolute right-full top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-4 border-b-4 border-r-4 border-transparent border-r-foreground"></div>
+        </div>
       </motion.div>
 
       <section id="home" className="min-h-screen flex items-center justify-center px-4 relative py-16 md:py-0">
