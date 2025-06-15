@@ -29,14 +29,14 @@ const About = () => {
             className="space-y-6"
           >
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Passionate Full-Stack Developer with hands-on experience in
-              building scalable web applications using React, Redux Toolkit,
-              Node.js, Express.js, MongoDB, and MySQL. Skilled in developing
-              intuitive UI components, optimizing user experiences, and
-              enhancing application performance. Strong problem-solving
-              abilities with expertise in debugging, API development, and
-              improving system efficiency. Dedicated to delivering high-quality,
-              maintainable, and responsive web solutions.
+              Full-Stack Developer with practical experience in creating
+              scalable web applications using React, Redux Toolkit, Node.js,
+              Express.js, MongoDB and MySQL. Proficient in crafting intuitive
+              user interfaces, optimizing user experience, and boosting
+              application performance. Adept at debugging, API development, and
+              enhancing overall system efficiency. Committed to delivering
+              robust, maintainable, and responsive web solutions with a focus on
+              quality and performance
             </p>
             <p className="text-lg text-muted-foreground leading-relaxed">
               With a foundation in JavaScript and hands-on experience in the

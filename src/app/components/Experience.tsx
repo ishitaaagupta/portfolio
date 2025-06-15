@@ -4,26 +4,33 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 
 const Experience = () => {
-  const experiences = [
-    {
-      title: "Junior ASE",
-      company: "TechAhead",
-      period: "February 2025 - Present",
-      logo: "https://cdn-ilajckf.nitrocdn.com/utLabjbGVjpaYDQkazoKnooguTzYeQRR/assets/images/optimized/rev-6d33770/tamediacdn.techaheadcorp.com/wp-content/uploads/2020/10/17061151/logo-black.svg",
-      description:
-        "Techahead's mission is to push the boundaries of digital innovation—crafting AI-driven, cloud-native, and high-performing solutions that redefine user experiences and operational efficiency. From mobile and web applications to enterprise cloud and AI consulting, we build with precision, data-driven insights, and a relentless focus on impact.",
-      current: true,
-    },
-    {
-      title: "Software Engineer Intern",
-      company: "Trackier",
-      period: "September 2024 - January 2025",
-      logo: "https://media.licdn.com/dms/image/v2/D4D0BAQHV9T0kIyoYSQ/company-logo_200_200/B4DZX1ZIN2HIAM-/0/1743578762028/trackier_logo?e=1754524800&v=beta&t=khsQ6QBgJgEH1_gkxXITegGD8-_AVKRgEdDi6QhmZL0",
-      description:
-"Trackier is a leading SaaS platform that specializes in performance marketing and affiliate marketing solutions. We empower businesses to optimize their marketing strategies through advanced tracking, analytics, and automation tools. Our platform is designed to enhance user engagement, increase ROI, and streamline marketing operations.",
-      current: false,
-    },
-  ]
+const experiences = [
+  {
+    title: "Junior ASE",
+    company: "TechAhead",
+    period: "February 2025 - Present",
+    logo: "https://cdn-ilajckf.nitrocdn.com/utLabjbGVjpaYDQkazoKnooguTzYeQRR/assets/images/optimized/rev-6d33770/tamediacdn.techaheadcorp.com/wp-content/uploads/2020/10/17061151/logo-black.svg",
+    description: [
+      "Developed responsive UI components using React.js, Tailwind CSS, and integrated RESTful APIs via Redux Toolkit.",
+      "Converted Figma designs into functional interfaces and enhanced UX with features like lazy loading and pagination.",
+      "Collaborated in SDLC processes and created dashboards using Chart.js and Recharts."
+    ],
+    current: true,
+  },
+  {
+    title: "Software Engineer Intern",
+    company: "Trackier",
+    period: "September 2024 - January 2025",
+    logo: "https://media.licdn.com/dms/image/v2/D4D0BAQHV9T0kIyoYSQ/company-logo_200_200/B4DZX1ZIN2HIAM-/0/1743578762028/trackier_logo?e=1754524800&v=beta&t=khsQ6QBgJgEH1_gkxXITegGD8-_AVKRgEdDi6QhmZL0",
+    description: [
+      "Built full-stack features using React, Node.js, and MongoDB with focus on modular, reusable components.",
+      "Developed APIs, integrated Cloudinary-based file uploads, and improved front-end performance with Redux Toolkit.",
+      "Wrote unit tests, debugged code, and contributed to user engagement through key module integrations."
+    ],
+    current: false,
+  }
+];
+
 
   return (
     <section id="experience" className="py-20 px-4 bg-secondary/20">

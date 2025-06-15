@@ -95,6 +95,23 @@ const Skills = () => {
       ],
     },
     {
+      category: "Project Management Tools",
+      skills: [
+        {
+          name: "Asana",
+          logo: "https://cdn.worldvectorlogo.com/logos/asana-1.svg",
+        },
+        {
+          name: "Zoho Projects",
+          logo: "https://www.zohowebstatic.com/sites/zweb/images/productlogos/projects.svg",
+        },
+        {
+          name: "Notion",
+          logo: "https://cdn.worldvectorlogo.com/logos/notion-2.svg",
+        },
+      ],
+    },
+    {
       category: "Version Control",
       skills: [
         {
@@ -126,7 +143,6 @@ const Skills = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             Professional <span className="text-primary">Skillset</span>
           </h2>
-          {/* <div className="w-20 h-1 bg-primary mx-auto"></div> */}
         </motion.div>
 
         <div className="space-y-8">
@@ -176,13 +192,22 @@ const Skills = () => {
                             height={48}
                             className="object-contain filter group-hover:brightness-110 transition-all duration-300"
                             style={{
+                              backgroundColor:
+                                mounted &&
+                                resolvedTheme === "dark" &&
+                                ["Notion", "Zoho Projects","GitHub", "Next.js", "Express.js", "Swagger"].includes(skill.name)
+                                  ? "#fff"
+                                  : "transparent",
+                              borderRadius:
+                                mounted &&
+                                resolvedTheme === "dark" &&
+                                skill.name === "Notion"
+                                  ? "6px"
+                                  : "0",
                               filter:
                                 mounted &&
                                 resolvedTheme === "dark" &&
-                                (skill.name === "Next.js" ||
-                                  skill.name === "GitHub" ||
-                                  skill.name === "Express.js" ||
-                                  skill.name === "Swagger")
+                                ["Next.js", "GitHub", "Express.js"].includes(skill.name)
                                   ? "invert(1)"
                                   : "none",
                             }}
@@ -211,9 +236,7 @@ const Skills = () => {
           viewport={{ once: true }}
           className="text-center mt-12"
         >
-          {/* <p className="text-muted-foreground">
-            Continuously expanding my toolkit with emerging technologies and industry best practices
-          </p> */}
+          {/* Optional footer note */}
         </motion.div>
       </div>
     </section>

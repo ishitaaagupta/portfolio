@@ -17,23 +17,21 @@ const Navbar = () => {
     setMounted(true)
   }, [])
 
-  const navItems = [ "About Me", "Experience", "Skills", "Projects"]
+  const navItems = ["About Me", "Experience", "Skills", "Projects"]
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId.toLowerCase().replace(" ", "-"))
     element?.scrollIntoView({ behavior: "smooth" })
-    setIsMobileMenuOpen(false) // Close mobile menu after navigation
+    setIsMobileMenuOpen(false)
   }
 
   const toggleTheme = () => {
     setIsLoading(true)
     const newTheme = resolvedTheme === "dark" ? "light" : "dark"
     setTheme(newTheme)
-
-    // Add a delay to show the loader, then reload
     setTimeout(() => {
       window.location.reload()
-    }, 3000) // 3 seconds to show the loader animation
+    }, 3000)
   }
 
   const toggleMobileMenu = () => {
@@ -43,7 +41,7 @@ const Navbar = () => {
   if (!mounted) {
     return (
       <nav className="fixed top-4 left-0 right-0 z-50 mx-auto w-fit bg-background/80 backdrop-blur-md border border-border rounded-full px-6 py-3 shadow-lg">
-        <div className="flex items-center justify-center space-x-8">
+        <div className="flex items-center justify-between space-x-6">
           <Logo />
           <div className="hidden md:flex items-center space-x-6">
             {navItems.map((item) => (
@@ -65,21 +63,19 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Loader */}
       <AnimatePresence>{isLoading && <Loader />}</AnimatePresence>
 
-      {/* Desktop Navbar */}
       <motion.nav
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="fixed top-4 left-0 right-0 z-50 mx-auto w-fit bg-background/80 backdrop-blur-md border border-border rounded-full px-6 py-3 shadow-lg"
+        className="fixed top-4 left-0 right-0 z-50 mx-auto w-[95%] max-w-6xl bg-background/80 backdrop-blur-md border border-border rounded-full px-6 py-3 shadow-lg"
       >
-        <div className="flex items-center justify-center space-x-8">
+        <div className="flex items-center justify-between w-full">
           {/* Logo */}
           <Logo />
 
-          {/* Desktop Navigation Items */}
+          {/* Desktop Nav */}
           <div className="hidden md:flex items-center space-x-6">
             {navItems.map((item) => (
               <motion.button
@@ -94,36 +90,39 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* Mobile Menu Button */}
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={toggleMobileMenu}
-            className="md:hidden p-2 rounded-full bg-secondary hover:bg-accent transition-colors duration-200"
-            aria-label="Toggle mobile menu"
-          >
-            {isMobileMenuOpen ? (
-              <X className="w-4 h-4 text-foreground" />
-            ) : (
-              <Menu className="w-4 h-4 text-foreground" />
-            )}
-          </motion.button>
+          {/* Right Controls */}
+          <div className="flex items-center space-x-3">
+            {/* Mobile Menu */}
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={toggleMobileMenu}
+              className="md:hidden p-2 rounded-full bg-secondary hover:bg-accent transition-colors duration-200"
+              aria-label="Toggle mobile menu"
+            >
+              {isMobileMenuOpen ? (
+                <X className="w-4 h-4 text-foreground" />
+              ) : (
+                <Menu className="w-4 h-4 text-foreground" />
+              )}
+            </motion.button>
 
-          {/* Theme Switcher */}
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={toggleTheme}
-            disabled={isLoading}
-            className="p-2 rounded-full bg-secondary hover:bg-accent transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-            aria-label="Toggle theme"
-          >
-            {resolvedTheme === "dark" ? (
-              <Sun className="w-4 h-4 text-foreground" />
-            ) : (
-              <Moon className="w-4 h-4 text-foreground" />
-            )}
-          </motion.button>
+            {/* Theme Switcher */}
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={toggleTheme}
+              disabled={isLoading}
+              className="p-2 rounded-full bg-secondary hover:bg-accent transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              aria-label="Toggle theme"
+            >
+              {resolvedTheme === "dark" ? (
+                <Sun className="w-4 h-4 text-foreground" />
+              ) : (
+                <Moon className="w-4 h-4 text-foreground" />
+              )}
+            </motion.button>
+          </div>
         </div>
       </motion.nav>
 
@@ -131,7 +130,6 @@ const Navbar = () => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <>
-            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -141,7 +139,6 @@ const Navbar = () => {
               onClick={() => setIsMobileMenuOpen(false)}
             />
 
-            {/* Mobile Menu */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: -20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -164,34 +161,6 @@ const Navbar = () => {
                     {item}
                   </motion.button>
                 ))}
-
-                {/* Mobile Theme Toggle */}
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.2, delay: navItems.length * 0.1 }}
-                  // className="pt-4 border-t border-border"
-                >
-                  {/* <motion.button
-                    whileHover={{ scale: 1.02, x: 10 }}
-                    whileTap={{ scale: 0.98 }}
-                    onClick={toggleTheme}
-                    disabled={isLoading}
-                    className="flex items-center space-x-3 py-3 px-4 text-foreground hover:text-primary hover:bg-secondary/50 rounded-lg transition-all duration-200 text-lg font-medium w-full disabled:opacity-50 disabled:cursor-not-allowed"
-                  > */}
-                      {/* {resolvedTheme === "dark" ? (
-                        <>
-                          <Sun className="w-5 h-5" />
-                          <span>Light Mode</span>
-                        </>
-                      ) : (
-                        <>
-                          <Moon className="w-5 h-5" />
-                          <span>Dark Mode</span>
-                        </>
-                      )} */}
-                  {/* </motion.button> */}
-                </motion.div>
               </div>
             </motion.div>
           </>
