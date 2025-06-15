@@ -1,11 +1,12 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Github, Linkedin, Mail, ArrowUp } from "lucide-react"
+import { Linkedin, Mail, Github, ArrowUp } from "lucide-react"
 import { useState, useEffect } from "react"
 
 const Footer = () => {
   const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0)
+  const [showScrollTop, setShowScrollTop] = useState(false)
 
   const quotes = [
     "Code is like humor. When you have to explain it, it's bad.",
@@ -30,10 +31,6 @@ const Footer = () => {
     "Software is a great combination between artistry and engineering.",
   ]
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" })
-  }
-
   // Change quote every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
@@ -48,142 +45,178 @@ const Footer = () => {
     setCurrentQuoteIndex(Math.floor(Math.random() * quotes.length))
   }, [quotes.length])
 
+  // Show scroll to top button when near bottom
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+      const scrollHeight = document.documentElement.scrollHeight
+      const clientHeight = document.documentElement.clientHeight
+
+      // Show button when user has scrolled 80% of the page
+      const scrollPercentage = (scrollTop / (scrollHeight - clientHeight)) * 100
+      setShowScrollTop(scrollPercentage > 80)
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
   return (
-    <footer className="py-20 px-4 bg-card border-t border-border relative overflow-hidden">
-      {/* Background animated elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        {[...Array(10)].map((_, i) => (
+    <>
+      {/* Fixed Scroll to Top Button - Right Bottom - Only show when near bottom */}
+      <motion.div
+        initial={{ opacity: 0, x: 50, scale: 0 }}
+        animate={{
+          opacity: showScrollTop ? 1 : 0,
+          x: showScrollTop ? 0 : 50,
+          scale: showScrollTop ? 1 : 0,
+        }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
+        className="fixed bottom-6 right-6 z-40 group"
+        style={{ pointerEvents: showScrollTop ? "auto" : "none" }}
+      >
+        <motion.button
+          whileHover={{
+            scale: 1.1,
+            y: -2,
+            boxShadow: "0 8px 25px rgba(0,0,0,0.15)",
+          }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className="relative w-12 h-12 bg-primary text-primary-foreground rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center"
+        >
+          {/* Arrow with bounce animation */}
           <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-primary/10 rounded-full"
+            animate={{ y: [0, -2, 0] }}
+            transition={{
+              duration: 2,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+            }}
+          >
+            <ArrowUp className="w-5 h-5" />
+          </motion.div>
+
+          {/* Subtle pulse ring */}
+          <motion.div
             animate={{
-              y: [0, -100],
-              opacity: [0, 1, 0],
+              scale: [1, 1.4, 1],
+              opacity: [0.5, 0, 0.5],
             }}
             transition={{
-              duration: Math.random() * 3 + 2,
+              duration: 2,
               repeat: Number.POSITIVE_INFINITY,
-              delay: Math.random() * 2,
+              ease: "easeInOut",
             }}
-            style={{
-              left: Math.random() * 100 + "%",
-              bottom: 0,
-            }}
+            className="absolute inset-0 border-2 border-primary rounded-full"
           />
-        ))}
-      </div>
 
-      <div className="max-w-6xl mx-auto relative z-10">
-        {/* Animated Quote */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <motion.blockquote
-            key={currentQuoteIndex}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.8 }}
-            className="text-xl md:text-2xl lg:text-3xl font-light text-foreground italic mb-6 min-h-[80px] flex items-center justify-center"
-          >
-            <motion.span
+          {/* Tooltip */}
+          <div className="absolute bottom-full mb-3 right-0 bg-foreground text-background px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none shadow-lg">
+            Back to Top
+            <div className="absolute top-full right-3 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-foreground"></div>
+          </div>
+        </motion.button>
+      </motion.div>
+
+      <footer className="py-20 px-4 bg-card border-t border-border relative overflow-hidden">
+        {/* Background animated elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          {[...Array(10)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-primary/10 rounded-full"
               animate={{
-                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                y: [0, -100],
+                opacity: [0, 1, 0],
               }}
-              transition={{ duration: 5, repeat: Number.POSITIVE_INFINITY }}
-              className="bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent bg-[length:200%_100%]"
-            >
-              "{quotes[currentQuoteIndex]}"
-            </motion.span>
-          </motion.blockquote>
-
-          {/* Quote indicators */}
-          {/* <div className="flex justify-center space-x-2 mb-4">
-            {quotes.slice(0, 5).map((_, index) => (
-              <motion.div
-                key={index}
-                className={`w-2 h-2 rounded-full transition-colors duration-300 ${
-                  index === currentQuoteIndex % 5 ? "bg-primary" : "bg-muted-foreground/30"
-                }`}
-                whileHover={{ scale: 1.2 }}
-              />
-            ))}
-          </div> */}
-
-            {/* <motion.div
-              initial={{ width: 0 }}
-              whileInView={{ width: "200px" }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              viewport={{ once: true }}
-              className="h-0.5 bg-primary mx-auto"
-            ></motion.div> */}
-        </motion.div>
-
-        {/* Social Links */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          viewport={{ once: true }}
-          className="flex justify-center space-x-6 mb-12"
-        >
-          <motion.a
-            whileHover={{ scale: 1.2, y: -5, rotateY: 180 }}
-            whileTap={{ scale: 0.95 }}
-            href="https://github.com/ishitaaagupta"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-3 bg-secondary hover:bg-accent rounded-full transition-colors duration-200 relative group"
-          >
-            <Github className="w-6 h-6 text-foreground" />
-            <motion.div className="absolute inset-0 bg-primary/20 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300" />
-          </motion.a>
-
-          <motion.a
-            whileHover={{ scale: 1.2, y: -5, rotateY: 180 }}
-            whileTap={{ scale: 0.95 }}
-            href="https://www.linkedin.com/in/ishita-gupta-306020193/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-3 bg-secondary hover:bg-accent rounded-full transition-colors duration-200 relative group"
-          >
-            <Linkedin className="w-6 h-6 text-foreground" />
-            <motion.div className="absolute inset-0 bg-primary/20 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300" />
-          </motion.a>
-
-          <motion.a
-            whileHover={{ scale: 1.2, y: -5, rotateY: 180 }}
-            whileTap={{ scale: 0.95 }}
-            href="mailto:ishitagupta9901@gmail.com"
-            className="p-3 bg-secondary hover:bg-accent rounded-full transition-colors duration-200 relative group"
-          >
-            <Mail className="w-6 h-6 text-foreground" />
-            <motion.div className="absolute inset-0 bg-primary/20 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300" />
-          </motion.a>
-        </motion.div>
-
-        {/* Bottom Section */}
-        <div className="flex justify-center">
-          {/* Back to Top */}
-          <motion.button
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={scrollToTop}
-            className="flex items-center space-x-2 px-4 py-2 bg-secondary hover:bg-accent rounded-full transition-colors duration-200 relative group"
-          >
-            <motion.div whileHover={{ y: -2 }} transition={{ type: "spring", stiffness: 300 }}>
-              <ArrowUp className="w-4 h-4" />
-            </motion.div>
-            <span className="text-sm font-medium">Back to Top</span>
-            <motion.div className="absolute inset-0 bg-primary/10 scale-0 group-hover:scale-100 transition-transform duration-300 rounded-full" />
-          </motion.button>
+              transition={{
+                duration: Math.random() * 3 + 2,
+                repeat: Number.POSITIVE_INFINITY,
+                delay: Math.random() * 2,
+              }}
+              style={{
+                left: Math.random() * 100 + "%",
+                bottom: 0,
+              }}
+            />
+          ))}
         </div>
-      </div>
-    </footer>
+
+        <div className="max-w-6xl mx-auto relative z-10">
+          {/* Animated Quote - Simplified */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <motion.blockquote
+              key={currentQuoteIndex}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.8 }}
+              className="text-xl md:text-2xl lg:text-3xl font-light text-foreground italic mb-6 min-h-[80px] flex items-center justify-center"
+            >
+              <motion.span
+                animate={{
+                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                }}
+                transition={{ duration: 5, repeat: Number.POSITIVE_INFINITY }}
+                className="bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent bg-[length:200%_100%]"
+              >
+                "{quotes[currentQuoteIndex]}"
+              </motion.span>
+            </motion.blockquote>
+          </motion.div>
+
+          {/* Social Links */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="flex justify-center space-x-6 mb-12"
+          >
+            <motion.a
+              whileHover={{ scale: 1.1, y: -3 }}
+              whileTap={{ scale: 0.95 }}
+              href="https://github.com/ishitaaagupta"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-3 bg-secondary hover:bg-accent rounded-full transition-colors duration-200 relative group"
+            >
+              <Github className="w-6 h-6 text-foreground" />
+              <motion.div className="absolute inset-0 bg-primary/20 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300" />
+            </motion.a>
+
+            <motion.a
+              whileHover={{ scale: 1.1, y: -3 }}
+              whileTap={{ scale: 0.95 }}
+              href="https://www.linkedin.com/in/ishita-gupta-306020193/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-3 bg-secondary hover:bg-accent rounded-full transition-colors duration-200 relative group"
+            >
+              <Linkedin className="w-6 h-6 text-foreground" />
+              <motion.div className="absolute inset-0 bg-primary/20 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300" />
+            </motion.a>
+
+            <motion.a
+              whileHover={{ scale: 1.1, y: -3 }}
+              whileTap={{ scale: 0.95 }}
+              href="mailto:ishitagupta9901@gmail.com"
+              className="p-3 bg-secondary hover:bg-accent rounded-full transition-colors duration-200 relative group"
+            >
+              <Mail className="w-6 h-6 text-foreground" />
+              <motion.div className="absolute inset-0 bg-primary/20 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300" />
+            </motion.a>
+          </motion.div>
+        </div>
+      </footer>
+    </>
   )
 }
 

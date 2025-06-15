@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { useTheme } from "next-themes"
 import { Download } from "lucide-react"
@@ -10,7 +10,6 @@ const Hero = () => {
   const [displayText, setDisplayText] = useState("")
   const [isDeleting, setIsDeleting] = useState(false)
   const [mounted, setMounted] = useState(false)
-  const [textColor, setTextColor] = useState("#000000")
   const { theme, resolvedTheme } = useTheme()
 
   const roles = ["Software Engineer", "Tech Enthusiast"]
@@ -19,34 +18,6 @@ const Hero = () => {
   useEffect(() => {
     setMounted(true)
   }, [])
-
-  // Update text color whenever theme changes
-  const updateTextColor = useCallback(() => {
-    const currentTheme = resolvedTheme || theme
-    const newColor = currentTheme === "dark" ? "#ffffff" : "#000000"
-    setTextColor(newColor)
-  }, [resolvedTheme, theme])
-
-  // Initial color setup and theme change listener
-  useEffect(() => {
-    if (mounted) {
-      updateTextColor()
-
-      // Add event listener for theme changes
-      window.addEventListener("themeChange", updateTextColor)
-
-      return () => {
-        window.removeEventListener("themeChange", updateTextColor)
-      }
-    }
-  }, [mounted, updateTextColor])
-
-  // Force update on theme change
-  useEffect(() => {
-    if (mounted) {
-      updateTextColor()
-    }
-  }, [theme, resolvedTheme, mounted, updateTextColor])
 
   useEffect(() => {
     const currentString = roles[currentRole]
@@ -75,32 +46,9 @@ const Hero = () => {
 
   const downloadResume = () => {
     const link = document.createElement("a")
-    link.href = "/Ishita_Gupta_Resume.pdf"
+    link.href = "/IshitaGupta-Resume.pdf"
     link.download = "IshitaGupta-Resume.pdf"
     link.click()
-  }
-
-  const nameVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  }
-
-  const letterVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: "spring",
-        damping: 12,
-        stiffness: 200,
-      },
-    },
   }
 
   return (
@@ -109,7 +57,7 @@ const Hero = () => {
       <motion.div
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8, delay: 1 }}
+        transition={{ duration: 0.8, delay: 1.5 }}
         className="fixed bottom-6 left-4 z-40 group"
       >
         <motion.button
@@ -128,103 +76,103 @@ const Hero = () => {
         </div>
       </motion.div>
 
-      <section id="home" className="min-h-screen flex items-center justify-center px-4 relative py-16 md:py-0">
-        {/* Mobile Blur Backdrop */}
-        <div className="absolute inset-0 md:hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 backdrop-blur-[1px]"></div>
-          <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-primary/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-1/3 right-1/4 w-24 h-24 bg-secondary/10 rounded-full blur-2xl"></div>
-          <div className="absolute top-1/2 right-1/3 w-16 h-16 bg-accent/10 rounded-full blur-xl"></div>
+      <section id="home" className="min-h-screen flex items-center justify-center px-4 relative">
+        {/* Subtle Background */}
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/3 via-transparent to-secondary/3"></div>
         </div>
 
         <div className="text-center relative z-10 max-w-4xl mx-auto">
+          {/* Greeting */}
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-xl md:text-2xl lg:text-3xl text-muted-foreground mb-6"
+          >
+            Hi, I am
+          </motion.h2>
+
+          {/* Name with subtle letter hover animations */}
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-8 text-foreground cursor-default"
+          >
+            {"Ishita Gupta".split("").map((letter, index) => (
+              <motion.span
+                key={index}
+                whileHover={{
+                  y: -4,
+                  color: "hsl(var(--primary))",
+                  transition: { type: "spring", stiffness: 400, damping: 10 },
+                }}
+                className="inline-block transition-colors duration-200"
+              >
+                {letter === " " ? "\u00A0" : letter}
+              </motion.span>
+            ))}
+          </motion.h1>
+
+          {/* Role with typing effect */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="mb-8"
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="text-xl md:text-2xl lg:text-3xl text-primary font-medium mb-12 h-10 flex items-center justify-center"
           >
-            <h2 className="text-xl md:text-2xl lg:text-3xl text-muted-foreground mb-4">Hi, I am</h2>
-
-            <motion.h1
-              variants={nameVariants}
-              initial="hidden"
-              animate="visible"
-              whileHover="visible"
-              className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 cursor-pointer"
-              style={{
-                color: textColor,
-                transition: "color 0.3s ease",
-              }}
-            >
-              {"Ishita Gupta".split("").map((letter, index) => (
-                <motion.span
-                  key={index}
-                  variants={letterVariants}
-                  whileHover={{
-                    scale: 1.2,
-                    color: "hsl(var(--primary))",
-                    transition: { type: "spring", stiffness: 300 },
-                  }}
-                  className="inline-block"
-                >
-                  {letter === " " ? "\u00A0" : letter}
-                </motion.span>
-              ))}
-            </motion.h1>
-
-            <div className="text-lg md:text-xl lg:text-2xl text-primary font-semibold h-8 mb-8">
-              {displayText}
-              <motion.span
-                animate={{ opacity: [1, 0] }}
-                transition={{ duration: 0.8, repeat: Number.POSITIVE_INFINITY, repeatType: "reverse" }}
-                className="inline-block w-0.5 h-6 bg-primary ml-1"
-              />
-            </div>
+            {displayText}
+            <motion.span
+              animate={{ opacity: [1, 0] }}
+              transition={{ duration: 0.8, repeat: Number.POSITIVE_INFINITY, repeatType: "reverse" }}
+              className="inline-block w-0.5 h-7 bg-primary ml-1"
+            />
           </motion.div>
 
+          {/* Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="flex flex-col sm:flex-row justify-center gap-4 mb-8"
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="flex flex-col sm:flex-row justify-center gap-4 mb-16"
           >
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
               onClick={() => document.getElementById("about-me")?.scrollIntoView({ behavior: "smooth" })}
-              className="px-6 py-3 md:px-8 md:py-3 bg-primary text-primary-foreground rounded-full font-medium hover:bg-primary/90 transition-colors duration-200 text-sm md:text-base"
+              className="px-8 py-4 bg-primary text-primary-foreground rounded-full font-medium hover:bg-primary/90 transition-all duration-300 shadow-lg hover:shadow-xl"
             >
               Get to know me
             </motion.button>
 
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
               onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
-              className="px-6 py-3 md:px-8 md:py-3 border border-border rounded-full font-medium hover:bg-secondary transition-colors duration-200 text-foreground text-sm md:text-base"
+              className="px-8 py-4 border-2 border-primary text-primary rounded-full font-medium hover:bg-primary hover:text-primary-foreground transition-all duration-300"
             >
               View my work
             </motion.button>
           </motion.div>
 
-          {/* Scroll Indicator */}
+          {/* Simple scroll indicator */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 1 }}
             className="flex flex-col items-center"
           >
-            <span className="text-muted-foreground text-sm mb-2">Scroll to explore</span>
+            <span className="text-muted-foreground text-sm mb-4">Scroll to explore</span>
             <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-              className="w-6 h-10 border-2 border-muted-foreground rounded-full flex justify-center"
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+              className="w-6 h-10 border-2 border-muted-foreground/50 rounded-full flex justify-center"
             >
               <motion.div
                 animate={{ y: [0, 12, 0] }}
-                transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-                className="w-1 h-3 bg-muted-foreground rounded-full mt-2"
+                transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+                className="w-1 h-3 bg-muted-foreground/70 rounded-full mt-2"
               />
             </motion.div>
           </motion.div>
