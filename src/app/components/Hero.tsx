@@ -46,7 +46,7 @@ const Hero = () => {
 
   const downloadResume = () => {
     const link = document.createElement("a")
-    link.href = "/IshitaGupta-Resume.pdf"
+    link.href = "/Ishita_Gupta_Resume.pdf"
     link.download = "IshitaGupta-Resume.pdf"
     link.click()
   }

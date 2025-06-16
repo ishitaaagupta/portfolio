@@ -9,10 +9,10 @@ const Projects = () => {
     {
       title: "Binkey It",
       description:
-        "An E-commerce web application with modern UI/UX design and robust functionality. Built with full-stack capabilities including payment integration and cloud storage.",
+        "A comprehensive e-commerce web application with modern UI/UX design and robust functionality. Built with full-stack capabilities including payment integration and cloud storage.",
       techStack: {
         Frontend: ["React", "Tailwind CSS"],
-        Backend: ["Express", "Axios"],
+        Backend: ["NodeJS","Express", "Axios"],
         Database: ["MongoDB", "Mongoose"],
         Services: ["Cloudinary", "Stripe"],
       },
@@ -25,11 +25,12 @@ const Projects = () => {
     {
       title: "Trackier Academy",
       description:
-        "An E-learning management system built for Trackier. Features include course management, user authentication, file uploads, and a modern responsive interface with state management.",
+        "An e-learning platform built for Trackier which includes course management, user authentication, file uploads and a modern responsive interface with state management.",
       techStack: {
-        Frontend: ["React", "RTK (React Redux Toolkit)", "TailwindCSS", "Axios"],
-        Backend: ["NodeJS", "ExpressJS", "Multer"],
+        Frontend: ["React", "React Redux Toolkit", "TailwindCSS"],
+        Backend: ["NodeJS", "ExpressJS", "Multer", "Axios"],
         Database: ["MongoDB"],
+          Services: ["Cloudinary"],
       },
       github: null,
       live: "https://academyv2.trackier.com/",
