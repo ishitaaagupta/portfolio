@@ -82,7 +82,7 @@ const Hero = () => {
           <div className="absolute inset-0 bg-gradient-to-br from-primary/3 via-transparent to-secondary/3"></div>
         </div>
 
-        <div className="text-center relative z-10 max-w-4xl mx-auto">
+        <div className="text-center mt-[40px] relative z-10 max-w-4xl mx-auto">
           {/* Greeting */}
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
