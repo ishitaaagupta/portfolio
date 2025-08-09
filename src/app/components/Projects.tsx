@@ -23,7 +23,7 @@ const Projects = () => {
       accentColor: "purple",
     },
     {
-      title: "Trackier Academy",
+      title: "Learning Academy",
       description:
         "An e-learning platform built for Trackier which includes course management, user authentication, file uploads and a modern responsive interface with state management.",
       techStack: {
