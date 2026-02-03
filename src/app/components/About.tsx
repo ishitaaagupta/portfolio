@@ -59,7 +59,7 @@ const About = () => {
             >
               <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary rounded-2xl blur-lg opacity-30"></div>
               <Image
-                src="https://media.licdn.com/dms/image/v2/D4E03AQEXiSUqz61nYg/profile-displayphoto-scale_200_200/B4EZwhzLyKJUAY-/0/1770093593149?e=1771459200&v=beta&t=2akp6O8iFQ5RJke-9JdVHSR3ai84LCDUr1ixTNtKuww"
+                src="https://techahead.keka.com/files/ccceb37a-d3eb-4034-9d1b-084d664ef447/200x200/profileimage/3ff9653207ab490183db7ee0d2408f6f.jpg?639046411312963997"
                 alt="Ishita Gupta"
                 width={400}
                 height={400}
