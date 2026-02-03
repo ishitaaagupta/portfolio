@@ -9,7 +9,7 @@ const experiences = [
     title: "Associate Software Engineer ",
     company: "TechAhead",
     period: "February 2025 - Present",
-    logo: "https://media.licdn.com/dms/image/v2/D4D0BAQFg2aAxA32CqA/company-logo_100_100/company-logo_100_100/0/1735904074036/techahead_logo?e=1764201600&v=beta&t=iH_qWUMWwVfHxSonqjODB_j2lkICsPiwdxxBUtGRE7U",
+    logo: "https://tamediacdn.techaheadcorp.com/wp-content/uploads/2025/08/04084639/logo-black.svg",
     description: [
       "Developed responsive UI components using React.js, Tailwind CSS, and integrated RESTful APIs via Redux Toolkit.",
       "Converted Figma designs into functional interfaces and enhanced UX with features like lazy loading and pagination.",
@@ -21,7 +21,7 @@ const experiences = [
     title: "Software Engineer Intern",
     company: "Trackier",
     period: "September 2024 - January 2025",
-    logo: "https://media.licdn.com/dms/image/v2/D4D0BAQHV9T0kIyoYSQ/company-logo_200_200/B4DZX1ZIN2HIAM-/0/1743578762028/trackier_logo?e=1764201600&v=beta&t=NFxpFSAo_5MoaHmmOkxiPpNt8L4zj-10LyGc8WzeaMo",
+    logo: "https://trackier.com/wp-content/uploads/2025/11/trackier-logo.avif",
     description: [
       "Built full-stack features using React, Node.js, and MongoDB with focus on modular, reusable components.",
       "Developed APIs, integrated Cloudinary-based file uploads, and improved front-end performance with Redux Toolkit.",
